@@ -3,9 +3,18 @@ package movies;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by chenhaonee on 2017/6/7.
@@ -25,7 +34,7 @@ public class GetMovies {
 
             Element head = heads.first();
             Element body = bodys.first();
-            String name = head.childNode(1).childNode(0).outerHtml().replace("\n","");
+            String name = head.childNode(1).childNode(0).outerHtml().replace("\n", "");
             String marks = head.childNode(3).childNode(3).childNode(0).outerHtml();
             String des = body.childNode(1).childNode(0).outerHtml();
             String directors = body.childNode(3).childNode(1).outerHtml();
@@ -42,28 +51,12 @@ public class GetMovies {
         return null;
     }
 
-    //#cinemaCinemalist  #cinemaCinemalist
 
-    public static Movies GetCinemaList(String movieId){
-        String url = "https://dianying.nuomi.com/movie/detail?movieId=MOVIEID";
-        url = url.replace("MOVIEID", movieId);
-        try {
-            Document doc = Jsoup.connect(url)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
-                    .get();
-            System.out.println(doc.toString());
-            Element list = doc.getElementById("cinemaCinemalist");
-
-
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static void main(String[] args) {
-        //GetMovieInfo("15546");
-        GetCinemaList("15546");
+        GetMovieInfo("15546");
+        //GetCinemaList("15546", "2017-06-11");
     }
+
+
 }
