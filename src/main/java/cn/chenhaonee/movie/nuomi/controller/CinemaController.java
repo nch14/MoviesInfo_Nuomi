@@ -38,7 +38,7 @@ public class CinemaController {
     public ResponseData<List<CityArea>> getAreaList(@RequestParam(value = "movieId") String movieId) {
         Area area = new GetCinemas().getAreaList(movieId);
         List<CityArea> cityAreas = area.getCityArea();
-        cityAreas.add(new CityArea("-1", "全部"));
+        cityAreas.add(0,new CityArea("-1", "全部"));
         return new ResponseData<>(cityAreas);
     }
 
