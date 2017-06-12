@@ -39,7 +39,7 @@ public class CinemaController {
     public ResponseData<List<CityArea>> getAreaList(@RequestParam(value = "movieId") String movieId) {
         Area area = new GetCinemas().getAreaList(movieId);
         List<CityArea> cityAreas = area.getCityArea();
-        cityAreas.add(0,new CityArea("-1", "全部"));
+        cityAreas.add(0, new CityArea("-1", "全部"));
         return new ResponseData<>(cityAreas);
     }
 
@@ -56,10 +56,12 @@ public class CinemaController {
     public ResponseData<List<Cinema>> getCinemaList(@RequestParam(value = "movieId") String movieId,
                                                     @RequestParam(value = "date") String date,
                                                     @RequestParam(value = "cityId") String cityId,
+                                                    @RequestParam(value = "pageSize", required = false, defaultValue = "6") String pageSize,
+                                                    @RequestParam(value = "pageNum", required = false, defaultValue = "0") String pageNum,
                                                     @RequestParam(value = "areaId") String areaId) {
         if (areaId.equals("-1"))
             areaId = null;
-        List<Cinema> cinemaList = new GetCinemas().getCinemaList(movieId, cityId, "6", "0", date, null, areaId);
+        List<Cinema> cinemaList = new GetCinemas().getCinemaList(movieId, cityId, pageSize, pageNum, date, null, areaId);
         return new ResponseData<>(cinemaList);
     }
 
