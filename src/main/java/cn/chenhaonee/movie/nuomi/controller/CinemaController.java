@@ -37,7 +37,9 @@ public class CinemaController {
     @ApiOperation(value = "获得区域列表", notes = "")
     public ResponseData<List<CityArea>> getAreaList(@RequestParam(value = "movieId") String movieId) {
         Area area = new GetCinemas().getAreaList(movieId);
-        return new ResponseData<>(area.getCityArea());
+        List<CityArea> cityAreas = area.getCityArea();
+        cityAreas.add(new CityArea("-1", "全部"));
+        return new ResponseData<>(cityAreas);
     }
 
     @RequestMapping(value = "/cinemaInfo", method = RequestMethod.GET)
@@ -54,6 +56,8 @@ public class CinemaController {
                                                     @RequestParam(value = "date") String date,
                                                     @RequestParam(value = "cityId") String cityId,
                                                     @RequestParam(value = "areaId") String areaId) {
+        if (areaId.equals("-1"))
+            areaId = null;
         List<Cinema> cinemaList = new GetCinemas().getCinemaList(movieId, cityId, "6", "0", date, null, areaId);
         return new ResponseData<>(cinemaList);
     }
@@ -61,14 +65,14 @@ public class CinemaController {
     @RequestMapping(value = "/cinemaItemList", method = RequestMethod.GET)
     @ApiOperation(value = "获得指定日期电影安排列表", notes = "date以及area请按照服务端返回的值作为参数进行请求")
     public ResponseData<DaySchedule> getMovieItemList(@RequestParam(value = "movieId") String movieId,
-                                                         @RequestParam(value = "cinemaId") String cinemaId,
-                                                         @RequestParam(value = "date") String date) {
+                                                      @RequestParam(value = "cinemaId") String cinemaId,
+                                                      @RequestParam(value = "date") String date) {
         String[] dateInString = date.split("-");
         if (dateInString.length == 3) {
             String month = dateInString[1].replace("0", "");
             String day = dateInString[2];
             String result = month + "月" + day + "日";
-            List<DaySchedule> daySchedules = new GetMovieTables().getDaySchedules(movieId, cinemaId,date);
+            List<DaySchedule> daySchedules = new GetMovieTables().getDaySchedules(movieId, cinemaId, date);
             DaySchedule thatDaySchedulesBox = daySchedules.stream().filter(daySchedule -> daySchedule.getDate().contains(result)).findFirst().get();
             return new ResponseData<>(thatDaySchedulesBox);
         }
