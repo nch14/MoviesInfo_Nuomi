@@ -27,10 +27,7 @@ public class GetMovieTables {
             Node node = doc.childNode(1).childNode(2).childNode(16).childNode(0);
             Document body = Jsoup.parse(node.outerHtml());
             Node films = body.childNode(0).childNode(1);
-            Node thisFilm = films.childNode(1).childNodes().stream()
-                    .filter(item -> item.outerHtml().contains("会员首单优惠\\\"}]},{\\\"movieId\\\":" + movieId))
-                    .collect(Collectors.toList())
-                    .get(1);
+            Node thisFilm = films.childNodes().stream().filter(item -> item.outerHtml().contains("\"movieId\\\":" + movieId)).findFirst().get();
             String content = thisFilm.outerHtml();
             content = content.replace("\\", "");
             int startFrom = content.indexOf("{\"movieId\"");

@@ -40,6 +40,14 @@ public class CinemaController {
         return new ResponseData<>(area.getCityArea());
     }
 
+    @RequestMapping(value = "/cinemaInfo", method = RequestMethod.GET)
+    @ApiOperation(value = "获得电影院详细", notes = "")
+    public ResponseData<List<CinemaDetail>> getInfoList(@RequestParam(value = "cinemaId") String cinemaId) {
+        List<CinemaDetail> cinemaDetails = new GetMovieTables().getCinemaInfo(cinemaId);
+        return new ResponseData<>(cinemaDetails);
+    }
+
+
     @RequestMapping(value = "/cinemaList", method = RequestMethod.GET)
     @ApiOperation(value = "获得指定影片影院列表", notes = "date以及area请按照服务端返回的值作为参数进行请求")
     public ResponseData<List<Cinema>> getCinemaList(@RequestParam(value = "movieId") String movieId,
