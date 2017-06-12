@@ -1,4 +1,4 @@
-package movies;
+package cn.chenhaonee.movie.nuomi.movies;
 
 /**
  * Created by chenhaonee on 2017/6/10.

@@ -1,4 +1,4 @@
-package movies;
+package cn.chenhaonee.movie.nuomi.movies;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,13 +18,19 @@ import java.util.stream.Collectors;
  */
 public class GetMovieTables {
 
-    public List<DaySchedule> getDaySchedules(String movieId, String cinemaId, String cityId, String date) {
-        String url = buildUrl("9720", "803", "315", "2017-06-11");
+    public List<DaySchedule> getDaySchedules(String movieId, String cinemaId, String date) {
+        String url = buildUrl(movieId, cinemaId, date);
+        //String url = buildUrl("9720", "803", "315", "2017-06-11");
+
         try {
             Document doc = getDocument(url);
             Node node = doc.childNode(1).childNode(2).childNode(16).childNode(0);
             Document body = Jsoup.parse(node.outerHtml());
-            Node thisFilm = body.childNode(0).childNode(1).childNode(6);
+            Node films = body.childNode(0).childNode(1);
+            Node thisFilm = films.childNode(1).childNodes().stream()
+                    .filter(item -> item.outerHtml().contains("会员首单优惠\\\"}]},{\\\"movieId\\\":" + movieId))
+                    .collect(Collectors.toList())
+                    .get(1);
             String content = thisFilm.outerHtml();
             content = content.replace("\\", "");
             int startFrom = content.indexOf("{\"movieId\"");
@@ -69,18 +75,17 @@ public class GetMovieTables {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         return null;
+        return null;
     }
 
     public static void main(String[] args) {
-        new GetMovieTables().getCinemaInfo("179");
+        new GetMovieTables().getDaySchedules("9720", "", "");
     }
 
-    private String buildUrl(String movieId, String cinemaId, String cityId, String date) {
-        String url = "https://dianying.nuomi.com/cinema/cinemadetail?cityId=CITY_ID&cinemaId=CINEMA_ID&movieId=MOVIE_ID&date=DATE";
+    private String buildUrl(String movieId, String cinemaId, String date) {
+        String url = "https://dianying.nuomi.com/cinema/cinemadetail?cinemaId=CINEMA_ID&movieId=MOVIE_ID&date=DATE";
         url = url.replace("MOVIE_ID", movieId);
         url = url.replace("CINEMA_ID", cinemaId);
-        url = url.replace("CITY_ID", cityId);
 
         LocalDate thatDay = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDateTime moonNight = thatDay.atStartOfDay();

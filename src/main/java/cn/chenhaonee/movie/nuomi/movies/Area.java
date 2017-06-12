@@ -1,4 +1,4 @@
-package movies;
+package cn.chenhaonee.movie.nuomi.movies;
 
 import java.util.List;
 
