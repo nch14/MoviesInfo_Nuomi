@@ -1,5 +1,6 @@
 package cn.chenhaonee.movie.nuomi.controller;
 
+import cn.chenhaonee.movie.nuomi.domain.*;
 import cn.chenhaonee.movie.nuomi.movies.*;
 import cn.chenhaonee.movie.nuomi.vo.ResponseData;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package cn.chenhaonee.movie.nuomi.movies;
+package cn.chenhaonee.movie.nuomi.domain;
 
 /**
  * Created by chenhaonee on 2017/6/7.
@@ -13,8 +13,9 @@ public class Movies {
     private String length;
     private String time;
     private String content;
+    private String url;
 
-    public Movies(String name, String marks, String des, String director, String roles, String country, String length, String time, String content) {
+    public Movies(String name, String marks, String des, String director, String roles, String country, String length, String time, String content, String url) {
         this.name = name;
         this.marks = marks;
         this.des = des;
@@ -24,6 +25,7 @@ public class Movies {
         this.length = length;
         this.time = time;
         this.content = content;
+        this.url = url;
     }
 
     public String getName() {
@@ -96,5 +98,13 @@ public class Movies {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -1,5 +1,8 @@
 package cn.chenhaonee.movie.nuomi.movies;
 
+import cn.chenhaonee.movie.nuomi.domain.CinemaDetail;
+import cn.chenhaonee.movie.nuomi.domain.DaySchedule;
+import cn.chenhaonee.movie.nuomi.domain.Schedule;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;

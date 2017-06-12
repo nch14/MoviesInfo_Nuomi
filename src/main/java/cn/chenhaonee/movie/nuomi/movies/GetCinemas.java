@@ -1,5 +1,8 @@
 package cn.chenhaonee.movie.nuomi.movies;
 
+import cn.chenhaonee.movie.nuomi.domain.Area;
+import cn.chenhaonee.movie.nuomi.domain.Cinema;
+import cn.chenhaonee.movie.nuomi.domain.CityArea;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;

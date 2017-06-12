@@ -1,5 +1,7 @@
 package cn.chenhaonee.movie.nuomi.movies;
 
+import cn.chenhaonee.movie.nuomi.domain.MovieSnap;
+import cn.chenhaonee.movie.nuomi.domain.Movies;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,7 +25,16 @@ public class GetMovies {
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
                     .get();
+            Elements imgs = doc.select("#detailIntro > div > div.fl.poster");
+            String imgUrl = "";
+            try {
+                imgUrl = imgs.first().childNode(1).attr("src");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             Element container = doc.getElementById("infoCopy");
+
             Elements heads = container.select("#infoCopy > h4");
             Elements bodys = container.select("#infoCopy > div");
 
@@ -38,7 +49,7 @@ public class GetMovies {
             String area = body.childNode(9).childNode(1).outerHtml();
             String length = body.childNode(11).childNode(1).outerHtml();
             String on = body.childNode(13).childNode(1).outerHtml();
-            Movies movies = new Movies(name, marks, des, directors, roles, area, length, on, content);
+            Movies movies = new Movies(name, marks, des, directors, roles, area, length, on, content, imgUrl);
             return movies;
         } catch (IOException e) {
             e.printStackTrace();

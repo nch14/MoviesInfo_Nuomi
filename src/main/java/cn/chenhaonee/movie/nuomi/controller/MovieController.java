@@ -1,8 +1,8 @@
 package cn.chenhaonee.movie.nuomi.controller;
 
 import cn.chenhaonee.movie.nuomi.movies.GetMovies;
-import cn.chenhaonee.movie.nuomi.movies.MovieSnap;
-import cn.chenhaonee.movie.nuomi.movies.Movies;
+import cn.chenhaonee.movie.nuomi.domain.MovieSnap;
+import cn.chenhaonee.movie.nuomi.domain.Movies;
 import cn.chenhaonee.movie.nuomi.vo.ResponseData;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
