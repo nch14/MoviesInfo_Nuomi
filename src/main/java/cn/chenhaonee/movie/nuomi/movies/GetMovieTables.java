@@ -132,15 +132,18 @@ public class GetMovieTables {
             String language = item.getString("language");
 
             int price = item.getInt("price");
+            double priceToShow = ((double) price) / 100;
             int memCardPrice = item.getInt("memCardPrice");
+            double memCardPriceToShow = ((double) memCardPrice) / 100;
             int originalPrice = item.getInt("originalPrice");
+            double originalPriceToShow = ((double) originalPrice) / 100;
 
             long startTime = item.getLong("startTime");
             long endTime = item.getLong("endTime");
             String theaterName = item.getString("theaterName");
 
             String version = item.getString("version");
-            Schedule schedule = new Schedule(remainedSeatNumber, totalSeatNumber, remainedSeatRate, language, price, memCardPrice, originalPrice, startTime, endTime, theaterName, version);
+            Schedule schedule = new Schedule(remainedSeatNumber, totalSeatNumber, remainedSeatRate, language, priceToShow, memCardPriceToShow, originalPriceToShow, startTime, endTime, theaterName, version);
             schedules.add(schedule);
         }
     }

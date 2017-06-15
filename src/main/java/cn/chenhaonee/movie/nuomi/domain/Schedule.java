@@ -10,9 +10,9 @@ public class Schedule {
 
     private String language;
 
-    private int price;
-    private int memCardPrice;
-    private int originalPrice;
+    private double price;
+    private double memCardPrice;
+    private double originalPrice;
 
     private long startTime;
     private long endTime;
@@ -23,7 +23,7 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(int remainedSeatNumber, int totalSeatNumber, int remainedSeatRate, String language, int price, int memCardPrice, int originalPrice, long startTime, long endTime, String theaterName, String version) {
+    public Schedule(int remainedSeatNumber, int totalSeatNumber, int remainedSeatRate, String language, double price, double memCardPrice, double originalPrice, long startTime, long endTime, String theaterName, String version) {
         this.remainedSeatNumber = remainedSeatNumber;
         this.totalSeatNumber = totalSeatNumber;
         this.remainedSeatRate = remainedSeatRate;
@@ -70,27 +70,27 @@ public class Schedule {
         this.language = language;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getMemCardPrice() {
+    public double getMemCardPrice() {
         return memCardPrice;
     }
 
-    public void setMemCardPrice(int memCardPrice) {
+    public void setMemCardPrice(double memCardPrice) {
         this.memCardPrice = memCardPrice;
     }
 
-    public int getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(int originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
